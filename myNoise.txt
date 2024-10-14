@@ -1,0 +1,82 @@
+python -m src.poison_main_my_noise --name finetune_eval_myNoise --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 1 --save_pert finetune_poison_token_3_shuffle --token_num 3  --lr 1e-5 --epoch 10  --pretrained
+
+# This one my
+python -m src.main_my_poison --name finetune_myGenPoison_flick8k_Vit32_Vit32Clip --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --pretrained --lr 1e-5
+
+
+python -m src.main_my_poison --name finetune_myGenPoison_flick8k_Vit16_Vit16Clip --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --pretrained --lr 1e-5
+
+
+# natural vit32 version
+python -m src.main --name finetune_clean_vit32_flick8k --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 1 --pretrained --lr 1e-5
+
+/remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-16/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K.pt
+
+
+python -m src.main_my_poison --name finetune_randomNoise_flick8k_Vit16_Vit16Clip --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --pretrained --lr 1e-5
+
+
+
+### Flickr8k
+#### Clean finetune on ViT16
+√ python -m src.main --name finetune_clean_flick8K_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16
+#### Clean finetune on ViT32
+√ python -m src.main --name finetune_clean_flick8K_vit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32
+#### Random Noise on ViT16
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit16_noiseOfRandom --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_mm/Multimodal-Unlearnable-Examples/flickr8k_random_noise_norm.pt
+#### Random Noise on ViT32
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit32_noiseOfRandom --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_mm/Multimodal-Unlearnable-Examples/flickr8k_random_noise_norm.pt
+#### Poison Train from ViTB-16 generator finetune on ViT-B/16
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit16_noiseOfvit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-16/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt
+#### Poison Train from ViTB-16 generator finetune on ViT-B/32
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit32_noiseOfvit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-16/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt
+#### Poison Train from ViTB-32 generator finetune on ViT-B/16
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit16_noiseOfvit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt
+#### Poison Train from ViTB-32 generator finetune on ViT-B/32
+√ python -m src.main_my_poison --name finetune_poison_flick8K_vit32_noiseOfvit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt
+#### Poison Train from ViTB-32 generator finetune on RN50
+√ python -m src.main_my_poison --name finetune_poison_flick8K_rn50_noiseOfvit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name RN50 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt
+#### Poison of MM from ViTB-16 CLIP finetune on ViT-B/16 token 3
+? 1. generate noise : python -m src.poison --name poison_flickr8k_token_3_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 3 --lr 1e-4 --model_name ViT-B/16 --epoch 1 
+! 2. test noise: python -m src.poison_main --name poison_eval_token_3_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/16 --epoch 40 --pretrained 
+！3. test noise: python -m src.poison_main_without_token --name poison_eval_no_tokens_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/16 --epoch 40 --pretrained 
+#### Poison of MM from ViTB-32 CLIP finetune on ViT-B/32 token 3
+? 1. generate noise : python -m src.poison --name poison_flickr8k_token_3_shuffle_vit32 --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 3 --lr 1e-4 --model_name ViT-B/32 --epoch 1 
+! 2. test noise: python -m src.poison_main --name poison_eval_token_3_shuffle_vit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/32 --epoch 40 --pretrained 
+！3. test noise: python -m src.poison_main_without_token --name poison_eval_no_tokens_shuffle_vit32 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/32 --epoch 40 --pretrained 
+#### Poison of MM from ViTB-16 generator finetune on ViT-B/32 token 5
+? 1. generate noise : python -m src.poison --name poison_flickr8k_token_5_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 5 --lr 1e-4 --model_name ViT-B/16 --epoch 1
+! 2. test noise: python -m src.poison_main --name poison_eval_token_5_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_token_5_shuffle --token_num 5  --lr 5e-4 --model_name ViT-B/16 --epoch 32 --pretrained 
+#### Poison of EM from ViTB-16 generator finetune on ViT-B/16 
+! 1. generate noise : python -m src.poison2 --name EM_poison_flickr8k_vit16 --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 0 --lr 1e-5 --model_name ViT-B/16 --epoch 1
+！2. test noise: python -m src.poison_main --name EM_poison_eval_flickr8k_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 3 --save_pert EM_poison_flickr8k_vit16  --lr 1e-5 --epoch 10  --pretrained --model_name ViT-B/16 --epoch 32 --pretrained 
+#### Poison of MM from RN50 CLIP finetune on ViT-B/32 token 3
+！1. generate noise : python -m src.poison --name poison_flickr8k_token_3_shuffle_rn50 --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 3 --lr 1e-4 --model_name RN50 --epoch 1 
+! 2. test noise: python -m src.poison_main --name poison_eval_token_3_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/16 --epoch 40 --pretrained 
+！3. test noise: python -m src.poison_main_without_token --name poison_eval_no_tokens_shuffle_vit16 --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_flickr8k_token_3_shuffle_vit16 --token_num 3  --lr 5e-4 --model_name ViT-B/16 --epoch 40 --pretrained 
+
+
+
+### Flickr30k
+#### Clean finetune on ViT16
+√ python -m src.main --name finetune_clean_flick30K_vit16 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16
+#### Clean finetune on ViT32
+√ python -m src.main --name finetune_clean_flick30K_vit32 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32
+#### Random Noise on ViT16
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit16_noiseOfRandom --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_mm/Multimodal-Unlearnable-Examples/noise_data/noise_cp_ln/random_noise_flickr30k_norm.pt
+#### Random Noise on ViT32
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit32_noiseOfRandom --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_mm/Multimodal-Unlearnable-Examples/noise_data/noise_cp_ln/random_noise_flickr30k_norm.pt
+#### Poison Train from ViTB-16 generator finetune on ViT-B/16
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit16_noiseOfvit16 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0 --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-16/Flickr-30K/classWise/noise_gen2_145000-224-224_flickr30K_ViT-B-16.pt.ln
+#### Poison Train from ViTB-16 generator finetune on ViT-B/32
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit32_noiseOfvit16 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-16/Flickr-30K/classWise/noise_gen2_145000-224-224_flickr30K_ViT-B-16.pt.ln
+#### Poison Train from ViTB-32 generator finetune on ViT-B/16
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit16_noiseOfvit32 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/16 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-30K/classWise/noise_gen2_145000-224-224_flickr8K_ViT-B-32.pt
+#### Poison Train from ViTB-32 generator finetune on ViT-B/32
+√ python -m src.main_my_poison --name finetune_poison_flick30K_vit32_noiseOfvit32 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0  --pretrained --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-30K/classWise/noise_gen2_145000-224-224_flickr8K_ViT-B-32.pt
+#### Poison of MM from ViTB-16 generator finetune on ViT-B/16 token 3
+- 1. generate noise : python -m src.poison --name poison_flickr30k_token_3_shuffle_vit16 --train_data ./data/Flickr30K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 3 --lr 1e-4 --model_name ViT-B/16 --epoch 1
+! 2. test noise: python -m src.poison_main --name poison_flickr30k_eval_token_3_shuffle_vit16 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_token_3_shuffle --token_num 3  --lr 5e-4 --model_name ViT-B/16 
+#### Poison of MM from ViTB-16 generator finetune on ViT-B/32 token 5
+! 1. generate noise : python -m src.poison --name poison_flickr30k_token_5_shuffle_vit16 --train_data ./data/Flickr30K/train.csv  --image_key images  --caption_key caption  --device_id 0 --token_num 5 --lr 1e-4 --model_name ViT-B/16 --epoch 1
+! 2. test noise: python -m src.poison_main --name poison_flickr30k_eval_token_5_shuffle_vit16 --train_data ./data/Flickr30K/train.csv --eval_test_data_dir ./data/Flickr30K/test.csv --image_key images  --caption_key caption  --device_id 0 --save_pert poison_token_5_shuffle --token_num 5  --lr 5e-4 --model_name ViT-B/16
