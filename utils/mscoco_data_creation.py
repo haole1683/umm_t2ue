@@ -28,5 +28,18 @@ if __name__ == "__main__":
             'caption': test_captions}
     df = pd.DataFrame(data)
     df.to_csv(f'{root}/mscoco_test.csv')
+    
+    
+    train = list(filter(lambda x: x['split'] == 'train', dataset['images']))
+    train_images = list(map(lambda x: x['filename'], train))
+    train_captions = list(map(lambda x: x['sentences'][0]['raw'], train))
+    # list_of_all_images = os.listdir(os.path.join(root, 'val2014'))
+    # move_files(test_images, 'test')
+
+    test_images = list(map(lambda x: f'train/{x}', test_images))
+    data = {'image': train_images,
+            'caption': train_captions}
+    df = pd.DataFrame(data)
+    df.to_csv(f'{root}/mscoco_train.csv')
 
 

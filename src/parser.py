@@ -11,7 +11,7 @@ def parse_args():
     
     parser.add_argument("--name", type = str, default = "default", help = "Experiment Name")
     parser.add_argument("--logs", type = str, default = os.path.join("./data/clip", "./logs/"), help = "Logs directory path")
-    parser.add_argument("--model_name", type = str, default = "ViT-B/16", choices = ["RN50", "RN101", "RN50x4", "ViT-B/32", "ViT-B/16"], help = "Model Name")
+    parser.add_argument("--model_name", type = str, default = "RN50", choices = ["RN50", "RN101", "RN50x4", "ViT-B/32"], help = "Model Name")
     parser.add_argument("--train_data", type = str, default = None, help = "Path to train data csv/tsv file")
     parser.add_argument("--validation_data", type = str, default = None, help = "Path to validation data csv/tsv file")
     parser.add_argument("--eval_data_type", type = str, default = None, choices = ["Caltech101", "CIFAR10", "CIFAR100", "DTD", "FGVCAircraft", "Flowers102", "Food101", "GTSRB", "ImageNet1K", "OxfordIIITPet", "RenderedSST2", "StanfordCars", "STL10", "SVHN", "ImageNetSketch", "ImageNetV2", "ImageNet-A", "ImageNet-R"], help = "Test dataset type")
@@ -35,7 +35,7 @@ def parse_args():
     parser.add_argument("--num_workers", type = int, default = 8, help = "Number of workers per gpu")
     parser.add_argument("--inmodal", action = "store_true", default = False, help = "Inmodality Training")
     parser.add_argument("--epochs", type = int, default = 32, help = "Number of train epochs")
-    parser.add_argument("--batch_size", type = int, default = 64, help = "Batch size")
+    parser.add_argument("--batch_size", type = int, default = 128, help = "Batch size")
     parser.add_argument("--lr", type = float, default = 5e-4, help = "Learning rate")
     parser.add_argument("--beta1", type = float, default = 0.9, help = "Adam momentum factor (Beta 1)")
     parser.add_argument("--beta2", type = float, default = 0.999, help = "Adam rmsprop factor (Beta 2)")
