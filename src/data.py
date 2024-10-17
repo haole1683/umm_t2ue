@@ -12,6 +12,7 @@ from PIL import Image, ImageFile
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
+from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize, RandomResizedCrop
 import wandb
 
 from utils.augment_text import _augment_text
@@ -138,7 +139,8 @@ class ImageCaptionDataset_PoisonImage(Dataset):
         self.noise = noise
         
         self.inmodal = inmodal
-
+        self.normalization = transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
+        
         if (inmodal):
             self.augment_captions = processor.process_text(
                 [_augment_text(caption) for caption in df[caption_key].tolist()])
@@ -174,9 +176,11 @@ class ImageCaptionDataset_PoisonImage(Dataset):
         else:
             item["input_ids"] = self.captions["input_ids"][idx]
             item["attention_mask"] = self.captions["attention_mask"][idx]
-            item["pixel_values"] = self.processor.process_image(image) 
+            item["pixel_values"] = self.processor.process_image_tensor(image) 
             if self.noise is not None:
                 item["pixel_values"] += self.noise[idx]
+            item["pixel_values"] = torch.clamp(item["pixel_values"],0,1)
+            item["pixel_values"] = self.normalization(item["pixel_values"])
             return item 
 
 

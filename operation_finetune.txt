@@ -29,7 +29,6 @@ python -m src.poison_main --name finetune_eval_token_3_shuffle --train_data ./da
 Token5
 
 python -m src.poison0 --name finetune_poison_token_5_shuffle --train_data ./data/Flickr-8K/train.csv  --image_key images  --caption_key caption  --device_id 1 --token_num 5 --lr 1e-5 --epoch 10 --pretrained
-
 python -m src.poison_main --name finetune_eval_token_5_shuffle --train_data ./data/Flickr-8K/train.csv --eval_test_data_dir ./data/Flickr-8K/test.csv --image_key images  --caption_key caption  --device_id 1 --save_pert finetune_poison_token_5_shuffle --token_num 5  --lr 1e-5 --epoch 10  --pretrained
 
 

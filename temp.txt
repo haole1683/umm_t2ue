@@ -1,0 +1,2 @@
+
+python -m src.main_my_poison --name scratch_poison_flick8K_noise_vit32_NoiseOfvit32 --train_data ./data/Flicker-8k//train.csv --eval_test_data_dir ./data/Flicker-8k/test.csv --image_key images  --caption_key caption  --device_id 0 --lr 1e-5 --model_name ViT-B/32 --noise_path /remote-home/songtianwei/research/unlearn_multimodal/outputCLIP/unlearn_stage2_generate_noise_temp1/ViT-B-32/Flickr-8K/classWise/noise_gen2_30000-224-224_flickr8K_norm.pt 
