@@ -126,7 +126,7 @@ class ImageCaptionDataset_Poison(Dataset):
 
 
 class ImageCaptionDataset_PoisonImage(Dataset):
-    def __init__(self, path, image_key, caption_key, delimiter, processor, noise, inmodal=False, defense=False, crop_size=150):
+    def __init__(self, path, image_key, caption_key, delimiter, processor, noise, inmodal=False, defense=False, crop_size=150, normalize=True):
         logging.debug(f"Loading aligned data from {path}")
 
         df = pd.read_csv(path, sep=delimiter)
@@ -154,6 +154,8 @@ class ImageCaptionDataset_PoisonImage(Dataset):
             self.is_backdoor = df['is_backdoor'].tolist()
         else:
             self.is_backdoor = None
+        
+        self.normalize = normalize
 
         logging.debug("Loaded data")
 
@@ -180,7 +182,8 @@ class ImageCaptionDataset_PoisonImage(Dataset):
             if self.noise is not None:
                 item["pixel_values"] += self.noise[idx]
             item["pixel_values"] = torch.clamp(item["pixel_values"],0,1)
-            item["pixel_values"] = self.normalization(item["pixel_values"])
+            if self.normalize:
+                item["pixel_values"] = self.normalization(item["pixel_values"])
             return item 
 
 
